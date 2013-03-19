@@ -4,7 +4,9 @@ poly2trihx
 
 poly2trihx is an Haxe port of the [poly2tri][1] library, an excellent Delaunay triangulation library, which supports constrained edges and holes. 
 
-[Html5 demo][2]
+[Html5 interactive demo][2]
+
+![Image](example.png?raw=true)
 
 The library works with Haxe 2 and 3, and has been tested on NME's flash, html5 and CPP targets, and on the neko target.
 
