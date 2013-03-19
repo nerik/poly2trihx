@@ -1,0 +1,17 @@
+-main ApplicationMain 
+-lib nme
+-cp /Users/nerik/Dropbox/taf/mpfh/lib/NME-stable/
+-cp src
+-D nme_install_tool
+-D html5
+-D web
+--no-traces
+--dead-code-elimination
+-js build/html5/bin/poly2trihx.js
+-cp build/html5/haxe
+-D html5
+-D html
+--remap flash:nme
+--remap native:browser
+-debug
+--js-modern
