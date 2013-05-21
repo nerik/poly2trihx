@@ -1,0 +1,16 @@
+-main ApplicationMain 
+-lib nme
+-cp /usr/lib/haxe/lib/nme/3,5,5/
+-cp ../src
+-D nme_install_tool
+-D html5
+-D web
+--no-traces
+--dead-code-elimination
+-js build/html5/bin/poly2trihx.js
+-cp build/html5/haxe
+-D html5
+-D html
+--remap flash:nme
+--remap native:browser
+--js-modern

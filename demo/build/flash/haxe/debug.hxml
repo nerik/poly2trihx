@@ -1,0 +1,13 @@
+-main ApplicationMain 
+-lib nme
+-cp /usr/lib/haxe/lib/nme/3,5,5/
+-cp ../src
+-D nme_install_tool
+-D web
+--no-traces
+-swf-version 11
+-swf9 build/flash/bin/poly2trihx.swf
+-swf-header 800:600:30:FFFFFF
+-cp build/flash/haxe
+--no-inline
+-debug

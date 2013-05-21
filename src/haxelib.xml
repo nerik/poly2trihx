@@ -1,0 +1,7 @@
+
+<project name="poly2trihx" url="https://github.com/nerik/poly2trihx" license="MIT">
+    <user name="nerik"/>
+    <tag v="cross"/>
+    <description>poly2trihx is an Haxe port of the poly2tri library, an excellent Delaunay triangulation library, which supports constrained edges and holes.</description>
+    <version name="0.1.2">Not used in production</version>
+</project>

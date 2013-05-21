@@ -20,8 +20,8 @@ The library works with Haxe 2 and 3, and has been tested on NME's flash, html5 a
     nme test "build.nmml" html5 -minify
 
     # neko
-    haxe -cp src -main me.nerik.poly2trihx.NekoDemo -neko bin/nekoDemo.n
-    neko bin/nekoDemo.n 
+    haxe -cp src -cp demo -main me.nerik.poly2trihx.NekoDemo -neko demo/build/nekoDemo.n
+    neko demo/build/nekoDemo.n 
 
    
 ## License
