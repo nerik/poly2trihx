@@ -8,20 +8,21 @@ poly2trihx is an Haxe port of the [poly2tri][1] library, an excellent Delaunay t
 
 [![Image](example.png?raw=true)][2]
 
-The library works with Haxe 2 and 3, and has been tested on NME's flash, html5 and CPP targets, and on the neko target.
+The library works with Haxe 2 and 3, and has been tested on OpenFl's flash, html5 and CPP targets (tested on iOs), and on the neko target.
 
-**How to compile the demos :**
+**How to compile the demo :**
 
+    cd demo
 
     # flash
-    nme test "build.nmml" flash
+    openfl test flash
 
     # html5
-    nme test "build.nmml" html5 -minify
+    openfl test html5 -minify
 
     # neko
-    haxe -cp src -cp demo -main me.nerik.poly2trihx.NekoDemo -neko demo/build/nekoDemo.n
-    neko demo/build/nekoDemo.n 
+    haxe -cp ../src -main me.nerik.poly2trihx.NekoDemo -neko build/nekoDemo.n
+    neko build/nekoDemo.n 
 
    
 ## License

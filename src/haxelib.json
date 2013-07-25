@@ -1,10 +1,10 @@
 {
     "name":         "poly2trihx",
     "url":          "https://github.com/nerik/poly2trihx",
-    "license":      "MIT",
+    "license":      "BSD",
     "tags":         ["cross"],
     "description":  "poly2trihx is an Haxe port of the poly2tri library, an excellent Delaunay triangulation library, which supports constrained edges and holes.",
-    "version":      "0.1.2",
-    "releasenote":  "",
+    "version":      "0.1.4",
+    "releasenote":  "integrated Nicolas fix (meshClean stack overflow) + support for OpenFl",
     "contributors": ["nerik"]
 }

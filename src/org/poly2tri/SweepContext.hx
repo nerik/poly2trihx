@@ -149,22 +149,18 @@ class SweepContext
 		}
 	}
 
-	public function meshClean(triangle:Triangle, level:Int = 0) 
-	{
-		if (level == 0) 
-		{
-			//for each (var mappedTriangle:Triangle in this.map) trace(mappedTriangle);
-		}
-		if (triangle == null || triangle.interior) return;
-		triangle.interior = true;
-		this.triangles.push(triangle);
-		for (n in 0...3) 
-		{
-		
-			if (!triangle.constrained_edge[n]) 
-			{
-				this.meshClean(triangle.neighbors[n], level + 1);
-			}
-		}
-	}
+	public function meshClean(t:Triangle)
+    {
+        var tmp = [t];
+        while( true ) {
+            var t = tmp.pop();
+            if( t == null ) break;
+            if( t.interior ) continue;
+            t.interior = true;
+            this.triangles.push(t);
+            for (n in 0...3)
+                if (!t.constrained_edge[n])
+                    tmp.push(t.neighbors[n]);
+        }
+    }
 }

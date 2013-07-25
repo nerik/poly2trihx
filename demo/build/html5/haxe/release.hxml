@@ -1,16 +1,22 @@
 -main ApplicationMain 
--lib nme
--cp /usr/lib/haxe/lib/nme/3,5,5/
+-lib openfl-compatibility
+-lib openfl
+-lib openfl-html5
+-cp /usr/lib/haxe/lib/openfl-compatibility/1,0,1/
+-cp /usr/lib/haxe/lib/openfl/1,0,4/
+-cp /usr/lib/haxe/lib/openfl-html5/1,0,3/
 -cp ../src
+-D tools=1
+-D openfl_ver=1.0.4
+-D nme
+-D openfl
 -D nme_install_tool
 -D html5
 -D web
 --no-traces
---dead-code-elimination
+-dce std
 -js build/html5/bin/poly2trihx.js
 -cp build/html5/haxe
 -D html5
 -D html
---remap flash:nme
---remap native:browser
---js-modern
+--remap flash:flash

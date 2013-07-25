@@ -19,6 +19,17 @@ class VisiblePolygon
 		sweepContext.addPolyline(polyline);
 	}
 
+	public function addPolylineFromFloats(pos:Array<Float>) 
+	{
+		var a = new Array();
+		for (i in 0...pos.length) 
+		{
+			if (i%2==1) continue;
+			a.push( new Point( pos[i], pos[i+1]) );
+		}
+		addPolyline(a);
+	}
+
 	public function reset() 
 	{
 		sweepContext = new SweepContext();

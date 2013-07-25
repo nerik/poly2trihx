@@ -24,14 +24,6 @@
 	<set name="BUILD_DIR" value="build"  />
 
 
-	<!--
-	The generated .js file was ~500k :/
-	Using the -minify flag with NME (closure compiler), we're down to 328k
-	With Haxe's --dead-code-elimination flag, it's still 200k (and the compiler issues some warnings)
-	-->
-	<haxeflag name="--dead-code-elimination" if="html5" />
-
-
 
 
 </project>

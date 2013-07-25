@@ -1,34 +1,34 @@
-#if nme
+#if (!macro || !haxe3)
+#if (nme || openfl)
 
 import me.nerik.poly2trihx.Demo;
-import nme.Assets;
-import nme.events.Event;
-
+import flash.display.DisplayObject;
+import openfl.Assets;
+import flash.events.Event;
 
 class ApplicationMain {
-	
+
 	static var mPreloader:NMEPreloader;
 
-	public static function main () {
-		
+	public static function main() {
 		var call_real = true;
 		
+		//nme.Lib.setPackage("nerik.me", "poly2trihx", "me.nerik.poly2trihx", "1.0.0");
 		
-		var loaded:Int = nme.Lib.current.loaderInfo.bytesLoaded;
-		var total:Int = nme.Lib.current.loaderInfo.bytesTotal;
 		
-		nme.Lib.current.stage.align = nme.display.StageAlign.TOP_LEFT;
-		nme.Lib.current.stage.scaleMode = nme.display.StageScaleMode.NO_SCALE;
+		var loaded:Int = flash.Lib.current.loaderInfo.bytesLoaded;
+		var total:Int = flash.Lib.current.loaderInfo.bytesTotal;
+		
+		flash.Lib.current.stage.align = flash.display.StageAlign.TOP_LEFT;
+		flash.Lib.current.stage.scaleMode = flash.display.StageScaleMode.NO_SCALE;
 		
 		if (loaded < total || true) /* Always wait for event */ {
-			
 			call_real = false;
 			mPreloader = new NMEPreloader();
-			nme.Lib.current.addChild(mPreloader);
+			flash.Lib.current.addChild(mPreloader);
 			mPreloader.onInit();
 			mPreloader.onUpdate(loaded,total);
-			nme.Lib.current.addEventListener (nme.events.Event.ENTER_FRAME, onEnter);
-			
+			flash.Lib.current.addEventListener(flash.events.Event.ENTER_FRAME, onEnter);
 		}
 		
 		
@@ -37,7 +37,7 @@ class ApplicationMain {
 		#end
 		
 		if (call_real)
-			begin ();
+			begin();
 	}
 
 	#if !fdb
@@ -45,14 +45,13 @@ class ApplicationMain {
 		var className = pos.className.substr(pos.className.lastIndexOf('.') + 1);
 		var message = className+"::"+pos.methodName+":"+pos.lineNumber+": " + v;
 		
-        if (flash.external.ExternalInterface.available)
+		if (flash.external.ExternalInterface.available)
 			flash.external.ExternalInterface.call("console.log", message);
 		else untyped flash.Boot.__trace(v, pos);
     }
 	#end
-	
-	private static function begin () {
-		
+
+	private static function begin() {
 		var hasMain = false;
 		
 		for (methodName in Type.getClassFields(me.nerik.poly2trihx.Demo))
@@ -66,57 +65,36 @@ class ApplicationMain {
 		
 		if (hasMain)
 		{
-			Reflect.callMethod (me.nerik.poly2trihx.Demo, Reflect.field (me.nerik.poly2trihx.Demo, "main"), []);
+			Reflect.callMethod(me.nerik.poly2trihx.Demo, Reflect.field (me.nerik.poly2trihx.Demo, "main"), []);
 		}
 		else
 		{
-			var instance = Type.createInstance(me.nerik.poly2trihx.Demo, []);
-			if (Std.is (instance, nme.display.DisplayObject)) {
-				nme.Lib.current.addChild(cast instance);
-			}	
+			var instance = Type.createInstance(DocumentClass, []);
+			if (Std.is(instance, flash.display.DisplayObject)) {
+				flash.Lib.current.addChild(cast instance);
+			}
 		}
-		
 	}
 
-	static function onEnter (_) {
-		
-		var loaded = nme.Lib.current.loaderInfo.bytesLoaded;
-		var total = nme.Lib.current.loaderInfo.bytesTotal;
+	static function onEnter(_) {
+		var loaded = flash.Lib.current.loaderInfo.bytesLoaded;
+		var total = flash.Lib.current.loaderInfo.bytesTotal;
 		mPreloader.onUpdate(loaded,total);
 		
 		if (loaded >= total) {
-			
-			nme.Lib.current.removeEventListener(nme.events.Event.ENTER_FRAME, onEnter);
+			flash.Lib.current.removeEventListener(flash.events.Event.ENTER_FRAME, onEnter);
 			mPreloader.addEventListener (Event.COMPLETE, preloader_onComplete);
 			mPreloader.onLoaded();
-			
 		}
-		
 	}
 
-	public static function getAsset (inName:String):Dynamic {
-		
-		
-		
-		return null;
-		
-	}
-	
-	
-	private static function preloader_onComplete (event:Event):Void {
-		
+	private static function preloader_onComplete(event:Event):Void {
 		mPreloader.removeEventListener (Event.COMPLETE, preloader_onComplete);
-		
-		nme.Lib.current.removeChild(mPreloader);
+		flash.Lib.current.removeChild(mPreloader);
 		mPreloader = null;
-		
-		begin ();
-		
+		begin();
 	}
-	
 }
-
-
 
 #else
 
@@ -124,7 +102,7 @@ import me.nerik.poly2trihx.Demo;
 
 class ApplicationMain {
 	
-	public static function main () {
+	public static function main() {
 		
 		var hasMain = false;
 		
@@ -139,18 +117,46 @@ class ApplicationMain {
 		
 		if (hasMain)
 		{
-			Reflect.callMethod (me.nerik.poly2trihx.Demo, Reflect.field (me.nerik.poly2trihx.Demo, "main"), []);
+			Reflect.callMethod(me.nerik.poly2trihx.Demo, Reflect.field (me.nerik.poly2trihx.Demo, "main"), []);
 		}
 		else
 		{
-			var instance = Type.createInstance(me.nerik.poly2trihx.Demo, []);
-			if (Std.is (instance, flash.display.DisplayObject)) {
+			var instance = Type.createInstance(DocumentClass, []);
+			if (Std.is(instance, flash.display.DisplayObject)) {
 				flash.Lib.current.addChild(cast instance);
 			}
 		}
-		
 	}
-
 }
 
+#end
+
+#if haxe3 @:build(DocumentClass.build()) #end
+class DocumentClass extends me.nerik.poly2trihx.Demo { }
+
+#else
+
+import haxe.macro.Context;
+import haxe.macro.Expr;
+
+class DocumentClass {
+	
+	macro public static function build ():Array<Field> {
+		var classType = Context.getLocalClass().get();
+		var searchTypes = classType;
+		while (searchTypes.superClass != null) {
+			if (searchTypes.pack.length == 2 && searchTypes.pack[1] == "display" && searchTypes.name == "DisplayObject") {
+				var fields = Context.getBuildFields();
+				var method = macro {
+					return flash.Lib.current.stage;
+				}
+				fields.push ({ name: "get_stage", access: [ APrivate ], meta: [ { name: ":getter", params: [ macro stage ], pos: Context.currentPos() } ], kind: FFun({ args: [], expr: method, params: [], ret: macro :flash.display.Stage }), pos: Context.currentPos() });
+				return fields;
+			}
+			searchTypes = searchTypes.superClass.t.get();
+		}
+		return null;
+	}
+	
+}
 #end
