@@ -2,7 +2,7 @@ poly2trihx
 ==========
 
 
-poly2trihx is an Haxe port of the [poly2tri][1] library, an excellent Delaunay triangulation library, which supports constrained edges and holes. 
+poly2trihx is an Haxe port of the [poly2tri][1] library, an excellent Delaunay triangulation library, which supports constrained edges and holes.
 
 [Html5 interactive demo][2]
 
@@ -22,9 +22,9 @@ The library works with Haxe 2 and 3, and has been tested on OpenFl's flash, html
 
     # neko
     haxe -cp ../src -main me.nerik.poly2trihx.NekoDemo -neko build/nekoDemo.n
-    neko build/nekoDemo.n 
+    neko build/nekoDemo.n
 
-   
+
 ## License
 
 BSD 3-Clause License
@@ -65,4 +65,4 @@ Some code from the example files borrowed from :
 
 
 [1]: https://code.google.com/p/poly2tri/
-[2]: http://nerik.me/project/poly2trihx
+[2]: http://nerik.github.io/poly2trihx/
