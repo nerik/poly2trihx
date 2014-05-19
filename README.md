@@ -24,6 +24,27 @@ The library works with Haxe 2 and 3, and has been tested on OpenFl's flash, html
     haxe -cp ../src -main me.nerik.poly2trihx.NekoDemo -neko build/nekoDemo.n
     neko build/nekoDemo.n
 
+**How to use it :**
+
+    *Imports*
+    import org.poly2tri.VisiblePolygon;
+    import org.poly2tri.Point;
+    import org.poly2tri.utils.TriangleCell;
+    import org.poly2tri.utils.AStar;
+    import org.poly2tri.utils.Funnel;
+
+    *Triangulation
+    var vp:VisiblePolygon = new VisiblePolygon();
+    vp.addPolyline( poly ); //poly and hole = Array<org.poly2tri.Point>
+    vp.addPolyline( hole );
+
+    vp.performTriangulationOnce();
+    var graph:Array<TriangleCell> = vp.getGraph();
+
+    *Pathfinding and string pulling*
+    var channel:Array<TriangleCell> = AStar.find(startTriangle,endTriangle,graph); //startTriangle and endTriangle = org.poly2tri.TriangleCell
+    var path:Array<Point> = Funnel.stringPull(startPoint,endPoint, channel); //startPoint and endPoint = org.poly2tri.Point
+
 
 ## License
 

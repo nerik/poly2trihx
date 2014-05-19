@@ -37,6 +37,10 @@ class Edge
 		q.edge_list.push( this );
 	}
 
+	public function hasPoint(point:Point):Bool {
+			return p.equals(point) || q.equals(point);
+	}
+
 
 
 	public function toString() 
