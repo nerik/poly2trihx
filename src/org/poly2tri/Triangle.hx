@@ -121,7 +121,7 @@ class Triangle
 			if (!t2.containsPoint(t1.points[1])) { index = 1; sum++; }
 			if (!t2.containsPoint(t1.points[2])) { index = 2; sum++; }
 			if (sum != 1) {
-				trace("Not adjacent");
+				throw "Triangle::Triangles not adjacent";
 			}
 			return index;
 	}
@@ -134,8 +134,7 @@ class Triangle
 			}
 		}
 		if (commonIndexes.length != 2) {
-			trace("Not adjacent");
-			return null;			
+			throw "Triangle::Triangles not adjacent";		
 		};
 		return new Edge(commonIndexes[0], commonIndexes[1]);
 	}
@@ -155,12 +154,6 @@ class Triangle
 		}
 
 		throw "Triangle::Point not in triangle";
-		// for (var n:uint = 0; n < 3; n++, no++) {
-		// 	while (no < 0) no += 3;
-		// 	while (no > 2) no -= 3;
-		// 	if (p.equals(this.points[n])) return no;
-		// }
-		// throw(new Error("Point not in triangle"));
 	}
 
 
