@@ -110,6 +110,35 @@ class Triangle
 		}
 	}
 
+	static public function getNotCommonVertex(t1:Triangle, t2:Triangle):Point {
+		return t1.points[Triangle.getNotCommonVertexIndex(t1, t2)];
+	}
+
+
+	static public function getNotCommonVertexIndex(t1:Triangle, t2:Triangle):Int {
+			var sum:Int = 0, index:Int = -1;
+			if (!t2.containsPoint(t1.points[0])) { index = 0; sum++; }
+			if (!t2.containsPoint(t1.points[1])) { index = 1; sum++; }
+			if (!t2.containsPoint(t1.points[2])) { index = 2; sum++; }
+			if (sum != 1) {
+				throw "Triangle::Triangles not adjacent";
+			}
+			return index;
+	}
+	
+	static public function getCommonEdge(t1:Triangle, t2:Triangle):Edge {
+		var commonIndexes:Array<Point> = new Array<Point>();
+		for(point in t1.points) {
+			if (t2.containsPoint(point)) {				
+				commonIndexes.push(point);
+			}
+		}
+		if (commonIndexes.length != 2) {
+			throw "Triangle::Triangles not adjacent";		
+		};
+		return new Edge(commonIndexes[0], commonIndexes[1]);
+	}
+
 
 
 	// Optimized?
@@ -125,12 +154,6 @@ class Triangle
 		}
 
 		throw "Triangle::Point not in triangle";
-		// for (var n:uint = 0; n < 3; n++, no++) {
-		// 	while (no < 0) no += 3;
-		// 	while (no > 2) no -= 3;
-		// 	if (p.equals(this.points[n])) return no;
-		// }
-		// throw(new Error("Point not in triangle"));
 	}
 
 

@@ -1,5 +1,7 @@
 package org.poly2tri;
 
+import org.poly2tri.Point;
+import org.poly2tri.utils.TriangleCell;
 
 class VisiblePolygon
 {
@@ -44,6 +46,17 @@ class VisiblePolygon
 		sweep.triangulate();
 	}
 
+	//get graph of triangles with neighbours and all
+	public function getGraph():Array<TriangleCell> {
+		var graph:Array<TriangleCell> = new Array<TriangleCell>();
+		for (t in sweepContext.triangles){
+			var triangle:TriangleCell = new TriangleCell(t);
+			triangle.setNeighbours(graph);
+			graph.push(triangle);
+		}
+		return graph;
+	}
+	
 	//returns vertices in a 3D engine-friendly, XYZ format
 	public function getVerticesAndTriangles() 
 	{
